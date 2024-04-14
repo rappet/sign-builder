@@ -49,7 +49,7 @@ pub fn DisplayView(props: &DisplayViewProps) -> Html {
                         <p class="text-2xl px-4 font-bold">{sign.subtitle.clone()}</p>
                     }
                     if !sign.url.trim().is_empty() {
-                        <p class="px-4 text-lg"><a class="hover:underline" href={sign.url.trim().to_string()} target="blank">{sign.url.trim().to_string()}</a></p>
+                        <p class="px-4 text-lg"><a class="hover:underline text-accent" href={sign.url.trim().to_string()} target="blank">{sign.url.trim().to_string()}</a></p>
                     }
                     if !sign.content.trim().is_empty() {
                         <p class="text-lg px-4 py-2">{sign.content.clone()}</p>

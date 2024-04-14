@@ -5,6 +5,7 @@ module.exports = {
         extend: {
             colors: {
                 accent: 'var(--accent-color)',
+                'accent-light': 'var(--accent-color-light)',
                 red: '#fd8c7b', // 'oklch(76% 0.14 30)',
                 yellow: '#d0ae32', // 'oklch(76% 0.14 93)',
                 green: '#7fc76f', // 'oklch(76% 0.14 140)',

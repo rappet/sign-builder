@@ -3,9 +3,10 @@ use std::rc::Rc;
 use base64::prelude::*;
 use ulid::Ulid;
 use web_sys::{
-    Event, HtmlInputElement, HtmlSelectElement, HtmlTextAreaElement, InputEvent, SubmitEvent,
+    Event, HtmlInputElement, HtmlSelectElement, HtmlTextAreaElement, InputEvent, MouseEvent,
+    SubmitEvent,
 };
-use yew::{function_component, html, Callback, Html, Properties, TargetCast};
+use yew::{classes, function_component, html, Callback, Html, Properties, TargetCast};
 use yew_hooks::use_title;
 use yew_router::prelude::*;
 
@@ -107,14 +108,35 @@ pub fn SignForm(props: &SignFormProps) -> Html {
 
     html! {
         <form class="flex flex-col" onsubmit={on_submit}>
-            <span class="inline-block py-4 pl-28 [&>svg]:w-24 [&>svg]:h-24 [&>svg]:stroke-black [&>svg]:fill-black">{sign.room.icon().map(|icon| Html::from_html_unchecked(icon.into()))}</span>
-            <div class="form-row">
-                <label for="room">{"Room:"}</label>
-                <select type="text" id="room" name="room" class="text-xl" value={sign.room.id()} onchange={on_room_change}>
+            <div class="form-col p-0">
+                <span class="hidden sr-only:inline-block"><label for="room">{"Room:"}</label></span>
+                <select type="text" id="room" name="room" class="hidden sr-only:inline-block" value={sign.room.id()} onchange={on_room_change}>
                     { Room::all().iter().map(|v| html! {
                         <option key={v.id()} value={v.id()} selected={*v == sign.room}>{v.name(Language::En)}</option>
                     }).collect::<Html>() }
                 </select>
+                <div class="flex flex-row overflow-x-scroll gap-4 p-4 w-full sr-only:hidden">
+                    { Room::all().iter().map(|v| {
+                        let is_selected = sign.room == *v;
+                        let on_change = props.on_change.clone();
+                        let sign = sign.clone();
+                        let cb = Callback::from(move |e: MouseEvent| {
+                            e.prevent_default();
+                            on_change.emit(Rc::new(Sign {
+                                room: *v,
+                                ..sign.as_ref().clone()
+                            }));
+                        });
+                        html! {
+                            <span class={v.color().accent_class()}>
+                                <a href="#" onclick={cb} class={classes!("flex", "flex-col", "place-content-center", "place-items-center", "w-20", "h-20", "rounded-lg", "bg-accent-light", "[&>svg]:stroke-black", "[&>svg]:w-8", "[&>svg]:h-8", "select-none", is_selected.then_some(["ring-2", "ring-accent", "shadow-lg"]))}>
+                                    {Html::from_html_unchecked(v.icon().unwrap_or_default().into())}
+                                    <span class="text-center text-sm text-accent">{v.name(Language::En)}</span>
+                                </a>
+                            </span>
+                        }
+                    }).collect::<Html>() }
+                </div>
             </div>
             <div class="form-row">
                 <label for="title">{"Title:"}</label>

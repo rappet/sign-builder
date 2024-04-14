@@ -4,26 +4,32 @@
 
 .accent-red {
     --accent-color: #fd8c7b;
+    --accent-color-light: #fd8c7b40;
 }
 
 .accent-yellow {
     --accent-color: #d0ae32;
+    --accent-color-light: #d0ae3240;
 }
 
 .accent-green {
     --accent-color: #7fc76f;
+    --accent-color-light: #7fc76f40;
 }
 
 .accent-blue {
     --accent-color: #30c0f8;
+    --accent-color-light: #30c0f840;
 }
 
 .accent-purple {
     --accent-color: #bf9bfc;
+    --accent-color-light: #bf9bfc40;
 }
 
 .accent-pink {
     --accent-color: #eb8ccd;
+    --accent-color-light: #eb8ccd40;
 }
 
 @layer base {
