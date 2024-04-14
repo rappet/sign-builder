@@ -2,7 +2,9 @@ use std::rc::Rc;
 
 use base64::prelude::*;
 use ulid::Ulid;
-use web_sys::{Event, HtmlInputElement, HtmlSelectElement, HtmlTextAreaElement, SubmitEvent};
+use web_sys::{
+    Event, HtmlInputElement, HtmlSelectElement, HtmlTextAreaElement, InputEvent, SubmitEvent,
+};
 use yew::{function_component, html, Callback, Html, Properties, TargetCast};
 use yew_hooks::use_title;
 use yew_router::prelude::*;
@@ -40,7 +42,7 @@ pub fn SignForm(props: &SignFormProps) -> Html {
         let sign = Rc::clone(&props.value);
         let on_change = props.on_change.clone();
 
-        Callback::from(move |e: Event| {
+        Callback::from(move |e: InputEvent| {
             let input = e.target_dyn_into::<HtmlInputElement>().unwrap();
             on_change.emit(Rc::new(Sign {
                 title: input.value(),
@@ -53,7 +55,7 @@ pub fn SignForm(props: &SignFormProps) -> Html {
         let sign = Rc::clone(&props.value);
         let on_change = props.on_change.clone();
 
-        Callback::from(move |e: Event| {
+        Callback::from(move |e: InputEvent| {
             let input = e.target_dyn_into::<HtmlInputElement>().unwrap();
             on_change.emit(Rc::new(Sign {
                 subtitle: input.value(),
@@ -66,7 +68,7 @@ pub fn SignForm(props: &SignFormProps) -> Html {
         let sign = Rc::clone(&props.value);
         let on_change = props.on_change.clone();
 
-        Callback::from(move |e: Event| {
+        Callback::from(move |e: InputEvent| {
             let input = e.target_dyn_into::<HtmlInputElement>().unwrap();
             on_change.emit(Rc::new(Sign {
                 url: input.value(),
@@ -79,7 +81,7 @@ pub fn SignForm(props: &SignFormProps) -> Html {
         let sign = Rc::clone(&props.value);
         let on_change = props.on_change.clone();
 
-        Callback::from(move |e: Event| {
+        Callback::from(move |e: InputEvent| {
             let input = e.target_dyn_into::<HtmlTextAreaElement>().unwrap();
             on_change.emit(Rc::new(Sign {
                 content: input.value(),
@@ -116,20 +118,20 @@ pub fn SignForm(props: &SignFormProps) -> Html {
             </div>
             <div class="form-row">
                 <label for="title">{"Title:"}</label>
-                <input type="text" id="title" name="title" class="text-2xl" value={sign.title.clone()} onchange={on_title_change} />
+                <input type="text" id="title" name="title" class="text-2xl" value={sign.title.clone()} oninput={on_title_change} />
             </div>
             <div class="form-row">
                 <label for="subtitle">{"Subtitle:"}</label>
-                <input type="text" id="subtitle" name="subtitle" class="text-xl" value={sign.subtitle.clone()} onchange={on_subtitle_change} />
+                <input type="text" id="subtitle" name="subtitle" class="text-xl" value={sign.subtitle.clone()} oninput={on_subtitle_change} />
             </div>
             <div class="form-row">
                 <label for="url">{"Url:"}</label>
-                <input type="text" id="url" name="url" class="text-xl" value={sign.url.clone()} onchange={on_url_change} />
+                <input type="text" id="url" name="url" class="text-xl" value={sign.url.clone()} oninput={on_url_change} />
             </div>
 
             <div class="form-col">
                 <label for="content">{"Content:"}</label>
-                <textarea rows="10" type="text" id="content" name="content" class="text-xl" value={sign.content.clone()} onchange={on_content_change} >
+                <textarea rows="10" type="text" id="content" name="content" class="text-xl" value={sign.content.clone()} oninput={on_content_change} >
                 </textarea>
             </div>
 
