@@ -8,13 +8,6 @@ use ulid::Ulid;
 use wasm_bindgen_test::*;
 
 wasm_bindgen_test_configure!(run_in_browser);
-
-#[wasm_bindgen_test]
-fn pass() {
-    assert_eq!(1, 1);
-}
-
-#[wasm_bindgen_test]
 async fn sign_storage() {
     assert_eq!(
         get_signs()
