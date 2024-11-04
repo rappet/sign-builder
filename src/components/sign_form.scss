@@ -1,0 +1,76 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.screen-reader {
+  display: none;
+  /* TODO screenreder */
+}
+
+.room-selector {
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  gap: 1rem;
+  padding: 1rem;
+  width: 100%;
+
+  a {
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    place-items: center;
+    width: 5rem;
+    height: 5rem;
+    background: var(--accent-color-light);
+
+    & > svg {
+      stroke: black;
+      width: 2rem;
+      height: 2rem;
+      select: none;
+    }
+
+    &.selected {
+      outline: 3px solid var(--accent-color);
+      box-shadow: 0 0 0 4px black;
+    }
+  }
+
+  .room-name {
+    text-align: center;
+    font-size: 80%;
+    color: var(--accent-color);
+  }
+}
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  padding: 0.5rem 1rem;
+  place-items: baseline;
+
+  & > input {
+    flex-grow: 1;
+    padding: 0.5rem 1rem;
+  }
+}
+
+.form-row > label, .form-col > label {
+  display: inline-block;
+  width: 6rem;
+}
+
+.form-col {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 1rem;
+  align-items: start;
+  gap: 0.5rem;
+
+  & > textarea {
+    width: 100%;
+    padding: 0.5rem 1rem;
+  }
+}

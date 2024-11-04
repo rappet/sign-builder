@@ -12,6 +12,8 @@ use crate::{
     services::signs::{delete_sign, get_signs},
 };
 
+turf::style_sheet!("src/views/index.scss");
+
 #[function_component]
 pub fn IndexView() -> Html {
     let sign_storage = use_local_storage("last-sign".to_string());
@@ -86,14 +88,18 @@ pub fn IndexView() -> Html {
 
         html!{
             <li>
-                <a href="#" onclick={load_sign_callback} class="rounded bg-neutral-50 hover:bg-neutral-100 active:bg-neutral-100 shadow-sm my-2 px-2 block">
-                    <p class="text-lg"><span>{sign.title.clone()}</span><span>{" - "}</span><span class={sign.room.color().text_class()}>{sign.room.name(Language::En)}</span></p>
+                <a href="#" onclick={load_sign_callback} class={classes!(ClassName::SIGN_SELECT_BUTTON, sign.room.color().accent_class())}>
+                    <p class={ClassName::SIGN_SELECT_BUTTON_TITLE}>
+                        <span>{sign.title.clone()}</span>
+                        <span>{" - "}</span>
+                        <span class={ClassName::SIGN_SELECT_BUTTON_ROOM_NAME}>{sign.room.name(Language::En)}</span>
+                    </p>
                     if show_subtitle || show_url {
-                        if show_subtitle { <span class="text-sm text-neutral-600">{sign.subtitle.clone()}</span> }
+                        if show_subtitle { <span class={ClassName::SIGN_SELECT_BUTTON_SUBTITLE}>{sign.subtitle.clone()}</span> }
                         if show_subtitle && show_url { <span>{" - "}</span> }
-                        if show_url { <span class={classes!("text-sm", sign.room.color().text_class())}>{sign.url.clone()}</span> }
+                        if show_url { <span class={ClassName::SIGN_SELECT_BUTTON_URL}>{sign.url.clone()}</span> }
                     }
-                    if show_content { <p class="text-sm text-neutral-800">{sign.content.clone()}</p> }
+                    if show_content { <p class={ClassName::SIGN_SELECT_BUTTON_SUBTITLE}>{sign.content.clone()}</p> }
                 </a>
                 <a href="#" onclick={delete_sign_callback}>{"Delete above"}</a>
             </li>
@@ -102,11 +108,12 @@ pub fn IndexView() -> Html {
     sign_list.reverse();
 
     html! {
-        <div class={classes!("wrapper", "bg-accent", sign.as_ref().room.color().accent_class())}>
-            <main>
+        <div class={classes!("wrapper", sign.as_ref().room.color().accent_class())}>
+            <style>{STYLE_SHEET}</style>
+            <main class={ClassName::SIGN_FORM}>
                 <h1>{ "Create Sign" }</h1>
                 <SignForm value={sign} on_change={on_sign_change} />
-                <ul class="px-4 py-2 max-h-96 overflow-y-scroll">
+                <ul class={ClassName::SIGN_SELECT_LIST}>
                     {sign_list}
                 </ul>
             </main>

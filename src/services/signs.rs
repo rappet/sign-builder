@@ -19,10 +19,13 @@ pub async fn open_db() -> anyhow::Result<IdbDatabase, DomException> {
                     &IdbObjectStoreParameters::default().key_path(Some(&IdbKeyPath::from("id"))),
                 )?;
 
+                let params = IdbIndexParameters::new();
+                params.set_unique(true);
+
                 store.create_index_with_params(
                     "content_index",
                     &IdbKeyPath::str_sequence(&["room", "title", "subtitle", "content", "url"]),
-                    &IdbIndexParameters::new().unique(true),
+                    &params,
                 )?;
             }
             Ok(())
