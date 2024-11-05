@@ -1,8 +1,8 @@
 .printed {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 
   &.printed-small {
     max-width: 70ch;
@@ -22,9 +22,9 @@
 }
 
 .text-content {
+  font-size: 1.5rem;
   flex-grow: 1;
   padding-right: 4rem;
-  font-size: 1.5rem;
 
   hgroup {
     h1 {
@@ -39,8 +39,8 @@
   }
 
   a {
-    color: var(--accent-color);
     text-decoration: underline;
+    color: var(--accent-color);
     text-decoration-thickness: 2px;
   }
 }
@@ -50,8 +50,8 @@
   top: -2rem;
   right: -2rem;
   border-radius: 1000rem;
-  background: white;
   outline: 4px solid black;
+  background: white;
 
   & > svg {
     display: block;

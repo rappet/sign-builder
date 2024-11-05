@@ -10,25 +10,25 @@
 
 .room-selector {
   display: flex;
-  flex-direction: row;
   overflow-x: scroll;
-  gap: 1rem;
-  padding: 1rem;
+  flex-direction: row;
   width: 100%;
+  padding: 1rem;
+  gap: 1rem;
 
   a {
     display: flex;
     flex-direction: column;
-    place-content: center;
-    place-items: center;
     width: 5rem;
     height: 5rem;
     background: var(--accent-color-light);
+    place-content: center;
+    place-items: center;
 
     & > svg {
-      stroke: black;
       width: 2rem;
       height: 2rem;
+      stroke: black;
       select: none;
     }
 
@@ -39,8 +39,8 @@
   }
 
   .room-name {
-    text-align: center;
     font-size: 80%;
+    text-align: center;
     color: var(--accent-color);
   }
 }
@@ -64,9 +64,9 @@
 
 .form-col {
   display: flex;
+  align-items: start;
   flex-direction: column;
   padding: 0.5rem 1rem;
-  align-items: start;
   gap: 0.5rem;
 
   & > textarea {

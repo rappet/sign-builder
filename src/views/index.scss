@@ -6,17 +6,17 @@
 }
 
 .sign-select-list {
-  padding: 0.5rem 1rem;
-  max-height: 24rem;
   overflow-y: scroll;
+  max-height: 24rem;
+  padding: 0.5rem 1rem;
 }
 
 .sign-select-button {
-  border-radius: 0.25rem;
-  background: #eee;
+  display: block;
   margin: 0.5rem 0;
   padding: 0 0.5rem;
-  display: block;
+  border-radius: 0.25rem;
+  background: #eee;
 
   &:hover, &:active {
     background: #ddd;
