@@ -7,6 +7,7 @@ edition = "2021"
 anyhow = "1.0.81"
 base64 = "0.22.0"
 gloo-utils = "0.2.0"
+implicit-clone = "0.5.0"
 indexed_db_futures = "0.4.1"
 log = "0.4.21"
 qrencode = { version = "0.14.0", default-features = false, features = ["svg"] }

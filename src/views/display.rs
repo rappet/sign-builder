@@ -1,10 +1,9 @@
 use std::rc::Rc;
 
-use qrencode::{render::svg, EcLevel, QrCode};
 use yew::{classes, function_component, html, Html, Properties};
 use yew_hooks::use_title;
 
-use crate::models::*;
+use crate::{components::QRCode, models::*};
 
 turf::style_sheet!("src/views/display.scss");
 
@@ -19,24 +18,13 @@ pub fn DisplayView(props: &DisplayViewProps) -> Html {
 
     use_title(format!("{} - Sign", sign.title));
 
-    let qr = if !sign.url.trim().is_empty() {
-        QrCode::with_error_correction_level(sign.url.trim(), EcLevel::L)
-            .ok()
-            .map(|qr| {
-                qr.render::<svg::Color>()
-                    .light_color(svg::Color("transparent"))
-                    .build()
-            })
-            .map(|svg| Html::from_html_unchecked(svg.into()))
-    } else {
-        None
-    };
+    let qr = sign.url.trim().to_string();
 
     html! {
         <div class={classes!("wrapper", sign.room.color().accent_class())}>
             <style>{STYLE_SHEET}</style>
             <main class={classes!(ClassName::PRINTED, sign.url.trim().is_empty().then_some(ClassName::PRINTED_SMALL))}>
-                if qr.is_some() {<div class={ClassName::QR_CONTAINER}>{qr}</div>}
+                if !qr.is_empty() {<div class={ClassName::QR_CONTAINER}><QRCode url={qr}/></div>}
                 <div class={ClassName::TEXT_CONTENT}>
                     if sign.room.icon().is_some() {
                         <div class={ClassName::ICON_CIRCLE}>

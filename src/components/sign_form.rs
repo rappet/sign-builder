@@ -14,7 +14,7 @@ use crate::{models::*, route::Route, services::signs::add_sign};
 
 turf::style_sheet!("src/components/sign_form.scss");
 
-#[derive(Properties, PartialEq)]
+#[derive(Properties, Clone, PartialEq)]
 pub struct SignFormProps {
     pub value: Rc<Sign>,
     pub on_change: Callback<Rc<Sign>>,

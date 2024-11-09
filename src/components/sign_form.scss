@@ -33,6 +33,7 @@
     }
 
     &.selected {
+      border-radius: 1px;
       outline: 3px solid var(--accent-color);
       box-shadow: 0 0 0 4px black;
     }

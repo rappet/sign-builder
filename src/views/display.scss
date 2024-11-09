@@ -22,7 +22,6 @@
 }
 
 .text-content {
-  font-size: 1.5rem;
   flex-grow: 1;
   padding-right: 4rem;
 
@@ -36,6 +35,10 @@
     p {
       font-weight: bold;
     }
+  }
+
+  p {
+    hyphens: auto;
   }
 
   a {
