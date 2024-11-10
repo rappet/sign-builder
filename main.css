@@ -109,13 +109,13 @@ input[type="submit"] {
 }
 
 .wrapper {
-    background: var(--accent-color);
+    background: var(--accent-color-light);
     display: flex;
     flex-direction: row;
     place-content: center;
     place-items: center;
     min-height: 100vh;
-    transition: background-color 500ms ease-in-out;
+    transition: background-color 0.2s ease-in-out;
     font-size: 120%;
     padding: 1rem;
 
