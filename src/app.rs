@@ -6,6 +6,7 @@ use yew_hooks::use_favicon;
 use yew_router::prelude::*;
 
 use crate::{models::*, route::Route, views::*};
+use crate::components::Footer;
 
 #[function_component]
 pub fn App() -> Html {
@@ -16,9 +17,12 @@ pub fn App() -> Html {
     use_favicon(favicon_url);
 
     html! {
-        <HashRouter>
-            <Switch<Route> render={switch} />
-        </HashRouter>
+        <>
+            <HashRouter>
+                <Switch<Route> render={switch} />
+            </HashRouter>
+            <Footer />
+        </>
     }
 }
 

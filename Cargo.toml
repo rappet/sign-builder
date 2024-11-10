@@ -2,10 +2,14 @@
 name = "sign-builder"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+authors = ["rappet <rappet@rappet.de>"]
+publish = false
 
 [dependencies]
 anyhow = "1.0.81"
 base64 = "0.22.0"
+chrono = "0.4.38"
 gloo-utils = "0.2.0"
 implicit-clone = "0.5.0"
 indexed_db_futures = "0.4.1"
