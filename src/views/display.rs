@@ -12,15 +12,15 @@ pub struct DisplayViewProps {
     pub sign: Rc<Sign>,
 }
 
-#[function_component]
-pub fn DisplayView(props: &DisplayViewProps) -> Html {
+#[component]
+pub fn DisplayView(props: &DisplayViewProps) -> impl IntoView {
     let sign = Rc::clone(&props.sign);
 
     use_title(format!("{} - Sign", sign.title));
 
     let qr = sign.url.trim().to_string();
 
-    html! {
+    view! {
         <div class={classes!("wrapper", sign.room.color().accent_class())}>
             <style>{STYLE_SHEET}</style>
             <main class={classes!(ClassName::PRINTED, sign.url.trim().is_empty().then_some(ClassName::PRINTED_SMALL))}>

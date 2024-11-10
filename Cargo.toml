@@ -10,23 +10,25 @@ publish = false
 anyhow = "1.0.81"
 base64 = "0.22.0"
 chrono = "0.4.38"
+codee = { version = "0.2.0", features = ["json_serde"] }
 gloo-utils = "0.2.0"
 implicit-clone = "0.5.0"
 indexed_db_futures = "0.4.1"
+leptos = { version = "0.6.15", features = ["csr", "nightly", "tracing"] }
+leptos-use = { version = "0.13.9", features = ["storage", "use_favicon"] }
+leptos_router = { version = "0.6.15", features = ["csr"] }
 log = "0.4.21"
 qrencode = { version = "0.14.0", default-features = false, features = ["svg"] }
 rmp-serde = "1.1.2"
-serde = { version = "1.0.197", features = ["derive"] }
+serde = { version = "1.0.197", features = ["derive", "rc"] }
 serde_json = "1.0.115"
+tracing = "0.1.40"
 turf = "0.9.4"
 ulid = { version = "1.1.2", features = ["serde"] }
 wasm-bindgen = "0.2.92"
 wasm-bindgen-futures = "0.4.42"
 wasm-logger = "0.2.0"
 web-sys = { version = "0.3.69", features = ["HtmlSelectElement", "HtmlFormElement"] }
-yew = { version = "0.21.0", features = ["csr"] }
-yew-hooks = "0.3.1"
-yew-router = "0.18.0"
 
 [profile.release]
 # less code to include into binary

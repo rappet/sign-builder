@@ -1,27 +1,24 @@
 use chrono::{Datelike, Local};
-use yew::prelude::*;
+use leptos::{component, create_memo, view, IntoView, MaybeSignal};
 
 turf::style_sheet!("src/components/footer.scss");
 
-#[derive(Properties, Clone, PartialEq)]
-pub struct FooterProps {
-    #[prop_or_default]
-    pub start_year: Option<u16>,
-}
-
-#[function_component(Footer)]
-pub fn footer(props: &FooterProps) -> Html {
-    let copyright = use_memo(props.start_year, |start_year| {
+#[component]
+pub fn Footer(
+    #[prop(optional, into)]
+    start_year: MaybeSignal<Option<u16>>
+) -> impl IntoView {
+    let copyright = create_memo(move |_| {
         let current = Local::now().year().try_into().unwrap_or(2024u16);
-        let start = start_year.unwrap_or(current.try_into().unwrap_or(2024u16));
+        let start = start_year().unwrap_or(current.try_into().unwrap_or(2024u16));
         if start < current {
-            format!("© {start}–{current} rappet — ")
+            format!("© {}–{current} rappet — ", start)
         } else {
-            format!("© {start} rappet — ")
+            format!("© {} rappet — ", start)
         }
     });
 
-    html! {
+    view! {
         <footer class={ClassName::FOOTER}>
             <style>{STYLE_SHEET}</style>
             <p>

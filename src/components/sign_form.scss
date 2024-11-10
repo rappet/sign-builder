@@ -21,13 +21,13 @@
     flex-direction: column;
     width: 5rem;
     height: 5rem;
-    transition: transform 0.1s ease-in-out;
+    transition: transform 0.05s ease-out;
     transform: translateY(0);
     background: var(--accent-color-light);
     place-content: center;
     place-items: center;
 
-    & > svg {
+    & > span > svg {
       width: 2rem;
       height: 2rem;
       stroke: black;

@@ -7,7 +7,7 @@ pub struct QRCodeProps {
 }
 
 #[function_component(QRCode)]
-pub fn qr_code(props: &QRCodeProps) -> Html {
+pub fn qr_code(props: &QRCodeProps) -> impl IntoView {
     QrCode::with_error_correction_level(props.url.trim(), EcLevel::L)
         .ok()
         .map(|qr| {
