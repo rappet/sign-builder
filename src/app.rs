@@ -2,25 +2,37 @@ use std::rc::Rc;
 
 use base64::prelude::*;
 use leptos::{component, view, IntoView};
+use leptos_meta::provide_meta_context;
+use leptos_router::{Route, Router, Routes};
+use leptos_use::use_favicon;
+use tracing::info;
 use crate::{models::*, views::*};
 use crate::components::Footer;
 
 #[component]
 pub fn App() -> impl IntoView {
+    provide_meta_context();
+
+    let (_favicon, set_favicon) = use_favicon();
+
     let favicon_url = format!(
         "data:image/svg+xml;base64,{}",
-        BASE64_STANDARD.encode(include_bytes!("icons/sign-right.svg"))
+        BASE64_URL_SAFE.encode(include_bytes!("icons/sign-right.svg"))
     );
-    //use_favicon(favicon_url);
+    info!("{favicon_url}");
+    set_favicon(Some(favicon_url));
 
     view! {
-        <>
             //<HashRouter>
             //    <Switch<Route> render={switch} />
             //</HashRouter>
-            <IndexView />
+        <Router>
+            <Routes>
+                <Route path="" view=IndexView />
+                <Route path="sign" view=DisplayView />
+            </Routes>
             <Footer />
-        </>
+        </Router>
     }
 }
 

@@ -295,6 +295,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "console_log"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "be8aed40e4edbf4d3b4431ab260b63fdc40f5780a4766824329ea0f1eefe3c0f"
+dependencies = [
+ "log",
+ "web-sys",
+]
+
+[[package]]
 name = "const-oid"
 version = "0.10.0-rc.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1283,6 +1293,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "leptos_meta"
+version = "0.6.15"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "25acc2f63cf91932013e400a95bf6e35e5d3dbb44a7b7e25a8e3057d12005b3b"
+dependencies = [
+ "cfg-if",
+ "indexmap",
+ "leptos",
+ "tracing",
+ "wasm-bindgen",
+ "web-sys",
+]
+
+[[package]]
 name = "leptos_reactive"
 version = "0.6.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2255,11 +2279,14 @@ dependencies = [
  "base64 0.22.1",
  "chrono",
  "codee",
+ "console_error_panic_hook",
+ "console_log",
  "gloo-utils",
  "implicit-clone",
  "indexed_db_futures",
  "leptos",
  "leptos-use",
+ "leptos_meta",
  "leptos_router",
  "log",
  "qrencode",
@@ -2269,6 +2296,7 @@ dependencies = [
  "tracing",
  "turf",
  "ulid",
+ "url",
  "wasm-bindgen",
  "wasm-bindgen-futures",
  "wasm-bindgen-test",
@@ -2474,6 +2502,7 @@ version = "0.1.40"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c3523ab5a71916ccf420eebdf5521fcef02141234bbc0b8a49f2fdc4544364ef"
 dependencies = [
+ "log",
  "pin-project-lite",
  "tracing-attributes",
  "tracing-core",

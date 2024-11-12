@@ -1,11 +1,9 @@
-use std::{ops::Deref, rc::Rc};
+use std::{rc::Rc};
 use codee::string::JsonSerdeCodec;
-use leptos::{component, create_signal, view, For, IntoView, Signal, WriteSignal};
+use leptos::{component, view, For, IntoView, Signal, WriteSignal};
 use leptos_use::storage::use_local_storage;
-use web_sys::MouseEvent;
 use crate::{
-    models::{Language, Sign},
-    services::signs::{delete_sign, get_signs},
+    models::{Sign},
 };
 
 turf::style_sheet!("src/components/sign_list.scss");

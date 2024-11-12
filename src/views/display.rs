@@ -1,48 +1,41 @@
-use std::rc::Rc;
+use leptos::{component, create_memo, view, IntoView, Show};
+use leptos_router::{create_query_signal, NavigateOptions};
 
-use yew::{classes, function_component, html, Html, Properties};
-use yew_hooks::use_title;
-
-use crate::{components::QRCode, models::*};
+use crate::{components::*, models::*};
 
 turf::style_sheet!("src/views/display.scss");
 
-#[derive(Properties, PartialEq)]
-pub struct DisplayViewProps {
-    pub sign: Rc<Sign>,
-}
-
 #[component]
-pub fn DisplayView(props: &DisplayViewProps) -> impl IntoView {
-    let sign = Rc::clone(&props.sign);
-
-    use_title(format!("{} - Sign", sign.title));
-
-    let qr = sign.url.trim().to_string();
+pub fn DisplayView() -> impl IntoView {
+    let mut nav_options = NavigateOptions::default();
+    nav_options.replace = true;
+    let (room, _set_room) = create_query_signal::<Room>("room");
+    let (title, _set_title) = create_query_signal::<String>("title");
+    let (subtitle, _set_subtitle) = create_query_signal::<String>("subtitle");
+    let (url, _set_url) = create_query_signal::<String>("url");
+    let (content, _set_content) = create_query_signal::<String>("content");
+    let page_title = create_memo(move |_| {
+        let title_val: String = title().unwrap_or_default();
+        if title_val.is_empty() {
+            format!("Unnamed Sign")
+        } else {
+            format!("{} - Sign", title_val.trim())
+        }
+    });
 
     view! {
-        <div class={classes!("wrapper", sign.room.color().accent_class())}>
+        <div class={move || format!("wrapper {}", room().unwrap_or_default().color().accent_class())}>
             <style>{STYLE_SHEET}</style>
-            <main class={classes!(ClassName::PRINTED, sign.url.trim().is_empty().then_some(ClassName::PRINTED_SMALL))}>
-                if !qr.is_empty() {<div class={ClassName::QR_CONTAINER}><QRCode url={qr}/></div>}
+            <main class=ClassName::PRINTED>
+                //<Show when=move || !url().unwrap_or_default().is_empty()><div class={ClassName::QR_CONTAINER}><QRCode url=move || url().unwrap_or_default()/></div></Show>
                 <div class={ClassName::TEXT_CONTENT}>
-                    if sign.room.icon().is_some() {
-                        <div class={ClassName::ICON_CIRCLE}>
-                            {Html::from_html_unchecked(sign.room.icon().unwrap_or_default().into())}
-                        </div>
-                    }
+                    <div class={ClassName::ICON_CIRCLE} inner_html=move || room().unwrap_or_default().icon().unwrap_or_default() />
                     <hgroup>
-                        <h1>{sign.title.trim()}</h1>
-                        if !sign.subtitle.trim().is_empty() {
-                            <p>{sign.subtitle.clone()}</p>
-                        }
+                        <h1>{move || title()}</h1>
+                        <p>{move || subtitle()}</p>
                     </hgroup>
-                    if !sign.url.trim().is_empty() {
-                        <p><a href={sign.url.trim().to_string()} target="blank">{sign.url.trim().to_string()}</a></p>
-                    }
-                    if !sign.content.trim().is_empty() {
-                        <p>{sign.content.clone()}</p>
-                    }
+                    <p><a href={move || url().unwrap_or_default().trim().to_string()} target="blank">{move || url().unwrap_or_default().trim().to_string()}</a></p>
+                    <p>{move ||content().unwrap_or_default()}</p>
                 </div>
             </main>
         </div>

@@ -1,3 +1,4 @@
+use std::fmt::{Display, Formatter};
 use std::str::FromStr;
 
 use serde::{Deserialize, Serialize};
@@ -24,6 +25,12 @@ pub enum Room {
     ELab,
     SeminarRoom,
     Garden,
+}
+
+impl Display for Room {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        f.write_str(self.id())
+    }
 }
 
 impl Room {

@@ -6,10 +6,12 @@ mod models;
 mod services;
 mod views;
 
-use leptos::mount_to_body;
+use leptos::*;
 use crate::app::App;
 
 fn main() {
-    wasm_logger::init(wasm_logger::Config::default());
+    _ = console_log::init_with_level(log::Level::Info);
+    console_error_panic_hook::set_once();
+
     mount_to_body(App);
 }
